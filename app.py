@@ -8,9 +8,10 @@ def index():
     return render_template("index.html", cars=cars)
 
 
-@app.route("/cars")
-def cars():
-    return render_template("cars.html")
+@app.route("/car/<id>")
+def car(id):
+    car = Car.query.filter_by(id=id).first()
+    return render_template("car.html", car=car)
 
 
 if __name__ == "__main__":

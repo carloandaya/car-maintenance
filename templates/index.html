@@ -9,7 +9,9 @@
 
 {% for car in cars %}
 <div class="car-listing">
-    <h2>{{ car.year }} {{ car.make }} {{ car.model }}</h2>
+    <a href="{{ url_for('car', id=car.id) }}">
+        <h2>{{ car.year }} {{ car.make }} {{ car.model }}</h2>
+    </a>
 </div>
 {% endfor %}
 {% endblock %}

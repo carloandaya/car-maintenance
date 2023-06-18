@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block header %}
-<h1>{% block title %}2004 Honda Accord{% endblock %}</h1>
+<h1>{% block title %}{{ car.year }} {{ car.make }} {{ car.model }}{% endblock %}</h1>
 {% endblock %}
 
 
