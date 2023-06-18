@@ -4,7 +4,8 @@ from models import db, Car, app
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    cars = Car.query.all()
+    return render_template("index.html", cars=cars)
 
 
 @app.route("/cars")

@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block content %}
-<ul>
-    <li><a href="{{ url_for('cars') }}">2004 Honda Accord</a></li>
-</ul>
+<h1>Cars</h1>
+
+{% for car in cars %}
+<div class="car-listing">
+    <h2>{{ car.year }} {{ car.make }} {{ car.model }}</h2>
+</div>
+{% endfor %}
 {% endblock %}
