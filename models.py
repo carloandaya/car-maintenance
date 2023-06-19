@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -24,11 +24,23 @@ class Car(db.Model):
 
     def __repr__(self):
         return f"""<Car (Year: {self.year}, Make: {self.make}, Model: {self.model}, VIN: {self.vin})>"""
-    
 
-class Maintenance(db.Model): 
+
+class Maintenance(db.Model):
     __tablename__ = "maintenance"
 
     id = Column(Integer, primary_key=True)
     car_id = Column(ForeignKey("cars.id"))
     car = relationship("Car", back_populates="maintenance")
+    type_id = Column(ForeignKey("maintenance_type.id"))
+    type = relationship("MaintenanceType", back_populates="maintenance")
+    date = Column("Date", DateTime)
+    mileage = Column("Mileage", Integer)
+
+
+class MaintenanceType(db.Model): 
+    __tablename__ = "maintenance_type"
+
+    id = Column(Integer, primary_key=True)
+    maintenance = relationship("Maintenance", back_populates="type")
+    description = Column("Description", String)
