@@ -37,8 +37,14 @@ class Maintenance(db.Model):
     date = Column("Date", DateTime)
     mileage = Column("Mileage", Integer)
 
+    def __repr__(self):
+        return f"""<Maintenance (Car: {self.car.year} {self.car.make} {self.car.model}\r
+                    Maintenance Type: {self.type.description}\r
+                    Date: {self.date}\r
+                    Mileage: {self.mileage})>"""
 
-class MaintenanceType(db.Model): 
+
+class MaintenanceType(db.Model):
     __tablename__ = "maintenance_type"
 
     id = Column(Integer, primary_key=True)
