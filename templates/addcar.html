@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+<h1>{% block title %}Add Car - Car Minder{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h1>Add Car</h1>
+
+<a href="{{ url_for('index') }}">
+    <p>Back</p>
+</a>
+
+<form action="{{ url_for('add_car') }}" method="post" class="form-example">
+    <div class="form-example">
+        <label for="year">Year: </label>
+        <input type="text" name="year" id="year" required>
+    </div>
+    <div class="form-example">
+        <label for="make">Make: </label>
+        <input type="text" name="make" id="make" required>
+    </div>
+    <div class="form-example">
+        <label for="model">Model: </label>
+        <input type="text" name="model" id="model" required>
+    </div>
+    <div class="form-example">
+        <label for="model">VIN: </label>
+        <input type="text" name="vin" id="vin">
+    </div>
+    <div class="form-example">
+        <input type="submit" value="Add Car">
+    </div>
+</form>
+
+{% endblock %}

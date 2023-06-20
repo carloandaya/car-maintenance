@@ -7,6 +7,8 @@
 {% block content %}
 <h1>Cars</h1>
 
+<a href="{{ url_for('add_car') }}""><p>Add Car</p></a>
+
 {% for car in cars %}
 <div class="car-listing">
     <a href="{{ url_for('car', id=car.id) }}">
