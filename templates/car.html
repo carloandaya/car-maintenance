@@ -6,5 +6,10 @@
 
 
 {% block content %}
-<p>Oil Change</p>
+<ol>
+    {% for entry in maintenance %}
+    <li>{{ entry.id }}</li>
+    {% endfor %}
+</ol>
+
 {% endblock %}
