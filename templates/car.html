@@ -6,10 +6,20 @@
 
 
 {% block content %}
-<ol>
-    {% for entry in maintenance %}
-    <li>{{ entry.id }}</li>
+<table>
+    <tr>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Mileage</th>
+    </tr>
+    {% for job in car.maintenance %}
+    <tr>
+        <td>{{ job.type.description }}</td>
+        <td>{{ job.date.strftime('%Y-%m-%d') }}</td>
+        <td>{{ job.mileage }}</td>
+    </tr>
     {% endfor %}
-</ol>
+
+</table>
 
 {% endblock %}
