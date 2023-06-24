@@ -6,6 +6,9 @@
 
 
 {% block content %}
+<a href="{{ url_for('add_mileage', car_id=car.id) }}">
+    <p>Add Mileage</p>
+</a>
 <table>
     <tr>
         <th>Description</th>

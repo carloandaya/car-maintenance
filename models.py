@@ -21,9 +21,23 @@ class Car(db.Model):
     model = Column("Model", String)
     vin = Column("VIN", String)
     maintenance = relationship("Maintenance", back_populates="car")
+    mileage = relationship("Mileage", back_populates="car")
 
     def __repr__(self):
         return f"""<Car (Year: {self.year}, Make: {self.make}, Model: {self.model}, VIN: {self.vin})>"""
+
+
+class Mileage(db.Model):
+    __tablename__ = "mileage"
+
+    id = Column(Integer, primary_key=True)
+    car_id = Column(ForeignKey("cars.id"))
+    car = relationship("Car", back_populates="mileage")
+    mileage = Column("Mileage", Integer)
+    date = Column("Date", DateTime)
+
+    def __repr__(self):
+        return f"""<Mileage (Mileage: {self.mileage}, Date: {self.date})>"""
 
 
 class Maintenance(db.Model):

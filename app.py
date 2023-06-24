@@ -1,5 +1,6 @@
+from datetime import date, datetime
 from flask import render_template, request, redirect, url_for
-from models import db, Car, app, Maintenance, MaintenanceType
+from models import db, Car, app, Maintenance, MaintenanceType, Mileage
 from waitress import serve
 
 
@@ -39,9 +40,17 @@ def add_maintenance_type():
     pass
 
 
-@app.route("/add-mileage/<id>", methods=["GET", "POST"])
-def add_mileage():
-    pass
+@app.route("/add-mileage/<car_id>", methods=["GET", "POST"])
+def add_mileage(car_id):
+    if request.form:
+        mileage_date = datetime.strptime(request.form["date"], "%Y-%m-%d")
+        mileage = Mileage(
+            car_id=car_id, mileage=request.form["mileage"], date=mileage_date
+        )
+        db.session.add(mileage)
+        db.session.commit()
+        return redirect(url_for("car", id=car_id))
+    return render_template("addmileage.html", car_id=car_id)
 
 
 @app.route("/car/<id>")
@@ -53,6 +62,16 @@ def car(id):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+        if not Car.query.all():
+            car = Car(year="2004", make="Honda", model="Accord")
+            db.session.add(car)
+            maintenance_type = MaintenanceType(description="Brake Pads")
+            db.session.add(maintenance_type)
+            maintenance = Maintenance(
+                car_id=1, type_id=1, date=date(2022, 10, 15), mileage=184500
+            )
+            db.session.add(maintenance)
+            db.session.commit()
 
     # app.run(debug=True, port=8000, host="127.0.0.1")
     serve(app, host="0.0.0.0", port=8080)
