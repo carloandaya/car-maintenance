@@ -24,9 +24,29 @@ def add_car():
     return render_template("addcar.html")
 
 
+@app.route("/add-maintenance", methods=["GET", "POST"])
+def add_maintenance():
+    pass
+
+
+@app.route("/maintenance-type")
+def maintenance():
+    pass
+
+
+@app.route("/add-maintenance-type", methods=["GET", "POST"])
+def add_maintenance_type():
+    pass
+
+
+@app.route("/add-mileage/<id>", methods=["GET", "POST"])
+def add_mileage():
+    pass
+
+
 @app.route("/car/<id>")
 def car(id):
-    car = Car.query.filter_by(id=id).first()    
+    car = Car.query.filter_by(id=id).first()
     return render_template("car.html", car=car)
 
 
