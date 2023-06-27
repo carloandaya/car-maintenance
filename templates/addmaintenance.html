@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+<h1>{% block title %}Add Mileage - Car Minder{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h1>Add Maintenance</h1>
+
+<a href="{{ url_for('index') }}">
+    <p>Back to index</p>
+</a>
+<a href="{{ url_for('car', id=car_id) }}"">
+    <p>Back to car</p>
+</a>
+
+
+<form action=" {{ url_for('add_maintenance', car_id=car_id) }}" method="post">
+    <div> 
+        <label for="maintenancetype">Maintenance Type: </label>                    
+        <select name="maintenancetype">
+            {% for m in maintenancetype %}
+        
+            {% endfor %}
+        </select>
+    <div>
+        <label for="date">Date: </label>
+        <input type="text" name="date" id="date" required>
+    </div>
+    <div>
+        <label for="mileage">Mileage: </label>
+        <input type="text" name="mileage" id="mileage" required>
+    </div>
+    <div>
+        <input type="submit" value="Add Maintenance">
+    </div>
+    </form>
+
+    {% endblock %}

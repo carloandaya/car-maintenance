@@ -25,9 +25,9 @@ def add_car():
     return render_template("addcar.html")
 
 
-@app.route("/add-maintenance", methods=["GET", "POST"])
-def add_maintenance():
-    pass
+@app.route("/add-maintenance/<car_id>", methods=["GET", "POST"])
+def add_maintenance(car_id):
+    return render_template("addmaintenance.html")
 
 
 @app.route("/maintenance-type")
@@ -37,7 +37,7 @@ def maintenance():
 
 @app.route("/add-maintenance-type", methods=["GET", "POST"])
 def add_maintenance_type():
-    pass
+    return render_template("addmaintenancetype.html")
 
 
 @app.route("/add-mileage/<car_id>", methods=["GET", "POST"])
