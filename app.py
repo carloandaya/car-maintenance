@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from flask import render_template, request, redirect, url_for
+from forms import AddCarForm
 from models import db, Car, app, Maintenance, MaintenanceType, Mileage
 from waitress import serve
 
@@ -12,17 +13,18 @@ def index():
 
 @app.route("/add-car", methods=["GET", "POST"])
 def add_car():
-    if request.form:
+    form = AddCarForm()
+    if form.validate_on_submit():
         car = Car(
-            year=request.form["year"],
-            make=request.form["make"],
-            model=request.form["model"],
-            vin=request.form["vin"],
+            year=form.year.data,
+            make=form.make.data,
+            model=form.model.data,
+            vin=form.vin.data,
         )
         db.session.add(car)
         db.session.commit()
         return redirect(url_for("index"))
-    return render_template("addcar.html")
+    return render_template("addcar.html", form=form)
 
 
 @app.route("/add-maintenance/<car_id>", methods=["GET", "POST"])

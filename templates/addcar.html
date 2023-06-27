@@ -12,25 +12,12 @@
 </a>
 
 <form action="{{ url_for('add_car') }}" method="post" class="add-car">
-    <div class="add-car">
-        <label for="year">Year: </label>
-        <input type="text" name="year" id="year" required>
-    </div>
-    <div class="add-car">
-        <label for="make">Make: </label>
-        <input type="text" name="make" id="make" required>
-    </div>
-    <div class="add-car">
-        <label for="model">Model: </label>
-        <input type="text" name="model" id="model" required>
-    </div>
-    <div class="add-car">
-        <label for="model">VIN: </label>
-        <input type="text" name="vin" id="vin">
-    </div>
-    <div class="add-car">
-        <input type="submit" value="Add Car">
-    </div>
+    {{ form.csrf_token }}
+    {{ form.year.label }} {{ form.year(size=20) }}
+    {{ form.make.label }} {{ form.make(size=20) }}
+    {{ form.model.label }} {{ form.model(size=20) }}
+    {{ form.vin.label }} {{ form.vin(size=20) }}        
+    <input type="submit" value="Add Car">    
 </form>
 
 {% endblock %}
