@@ -8,6 +8,7 @@ db = SQLAlchemy()
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///car-maintenance.db"
+app.config["SECRET_KEY"] = "secret"
 
 db.init_app(app)
 
