@@ -25,6 +25,14 @@ def add_car():
     return render_template("addcar.html")
 
 
+@app.route("/delete-car/<car_id>")
+def delete_car(car_id):
+    car = Car.query.get(car_id)
+    db.session.delete(car)
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
 @app.route("/add-maintenance", methods=["GET", "POST"])
 def add_maintenance():
     pass
