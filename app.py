@@ -37,7 +37,7 @@ def delete_car(car_id):
 
 @app.route("/add-maintenance/<car_id>", methods=["GET", "POST"])
 def add_maintenance(car_id):
-    return render_template("addmaintenance.html")
+    return render_template("addmaintenance.html", car_id=car_id)
 
 
 @app.route("/maintenance-type")
