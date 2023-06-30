@@ -8,3 +8,7 @@ class AddCarForm(FlaskForm):
     make = StringField('Make', validators=[DataRequired()])
     model = StringField('Model', validators=[DataRequired()])
     vin = StringField('VIN')
+
+
+class AddMaintenanceTypeForm(FlaskForm): 
+    description = StringField('Description', validators=[DataRequired()])

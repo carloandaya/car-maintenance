@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from flask import render_template, request, redirect, url_for
-from forms import AddCarForm
+from forms import AddCarForm, AddMaintenanceTypeForm
 from models import db, Car, app, Maintenance, MaintenanceType, Mileage
 from waitress import serve
 
@@ -25,6 +25,12 @@ def add_car():
         db.session.commit()
         return redirect(url_for("index"))
     return render_template("addcar.html", form=form)
+
+
+@app.route("/car/<id>")
+def car(id):
+    car = Car.query.filter_by(id=id).first()
+    return render_template("car.html", car=car)
 
 
 @app.route("/delete-car/<car_id>")
@@ -55,7 +61,15 @@ def maintenance_type():
 
 @app.route("/add-maintenance-type", methods=["GET", "POST"])
 def add_maintenance_type():
-    return render_template("addmaintenancetype.html")
+    form = AddMaintenanceTypeForm()
+    if form.validate_on_submit(): 
+        maintenance_type = MaintenanceType(
+            description=form.description.data
+        )
+        db.session.add(maintenance_type)
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template("addmaintenancetype.html", form=form)
 
 
 @app.route("/add-mileage/<car_id>", methods=["GET", "POST"])
@@ -69,12 +83,6 @@ def add_mileage(car_id):
         db.session.commit()
         return redirect(url_for("car", id=car_id))
     return render_template("addmileage.html", car_id=car_id)
-
-
-@app.route("/car/<id>")
-def car(id):
-    car = Car.query.filter_by(id=id).first()
-    return render_template("car.html", car=car)
 
 
 if __name__ == "__main__":
