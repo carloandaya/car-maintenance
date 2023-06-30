@@ -40,8 +40,16 @@ def add_maintenance(car_id):
     return render_template("addmaintenance.html", car_id=car_id)
 
 
+@app.route("/delete-maintenance/<maintenance_id>/<car_id>")
+def delete_maintenance(maintenance_id, car_id):
+    maintenance = Maintenance.query.get(maintenance_id)
+    db.session.delete(maintenance)
+    db.session.commit()
+    return redirect(url_for("car", id=car_id))
+
+
 @app.route("/maintenance-type")
-def maintenance():
+def maintenance_type():
     pass
 
 
